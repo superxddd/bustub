@@ -15,6 +15,7 @@
 #include <list>
 #include <mutex>  // NOLINT
 #include <vector>
+#include <unordered_map>
 
 #include "buffer/replacer.h"
 #include "common/config.h"
@@ -22,7 +23,7 @@
 namespace bustub {
 
 /**
- * LRUReplacer implements the Least Recently Used replacement policy.
+ * LRUReplacer 实现了最近最少使用（Least Recently Used, LRU）替换策略。
  */
 class LRUReplacer : public Replacer {
  public:
@@ -39,7 +40,11 @@ class LRUReplacer : public Replacer {
   auto Size() -> size_t override;
 
  private:
-  // TODO(student): implement me!
+  // TODO(student): 请在这里完成实现。
+  std::list<frame_id_t> lru_list_;
+  std::unordered_map<frame_id_t, std::list<frame_id_t>::iterator> f_map_;
+  std::mutex mutex_;
+
 };
 
 }  // namespace bustub
